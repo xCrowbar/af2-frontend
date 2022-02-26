@@ -4,6 +4,7 @@ import { keccak256 } from 'js-sha3';
 import App from '../App';
 import Web3 from 'web3';
 import Button from 'react-bootstrap/Button';
+import Maps from './Maps';
 
 
 
@@ -25,6 +26,7 @@ class Signup extends React.Component{
             name : '',
             account: null,
             surname : '',
+            enabledCheckBox: false,
         }
     }
 
@@ -32,55 +34,40 @@ count = async (event) =>{
     //count player
 }
 
+onClick = () => {
+    this.setState({ enabledCheckBox: !this.state.enabledCheckBox });
+  };
 
- loadAccount = async (event)=> {
-    const web3 = window.web3
-    const accounts = await web3.eth.getAccounts()
-    this.setState({ account: accounts[0] })
-    console.log(accounts)
-    const hash = keccak256(accounts)
-    console.log(hash)
-    const fhash = '0x' + hash
-    console.log(fhash)
-    const networkId= await web3.eth.net.getId()
-    console.log(networkId)
-    const networkData = designVoting.networks[networkId]
-    console.log(networkData)
-    if(networkData){
-        const contract = web3.eth.Contract(designVoting.abi,networkData.address)
-        const contract1 = web3.eth.Contract(designVoting.abi,networkData.address)
-        this.setState({ contract : contract,contract1 : contract1 })
-    }
-   await web3.eth.personal.sign(fhash, accounts ,(err,res) =>{
-                                                                      if(res){
-                                                                            console.log("signature:", res)
-            //test function to check the result of the signature in the console, if the signature is correct it should account value be shown
-                                                                            web3.eth.personal.ecRecover(fhash, res).then(console.log)
-            //to be able to call a function of the smart contract you must use the function this.state.contract.methods.functionName
-                                                                           this.state.contract.methods.addPlayer(fhash, res).send({from : accounts}).on('error', function(error){
-            //errors are the error messages sent by the smart contract if the invocation has not occurred with success
-                                                                             const string = error.message;
-                                                                             const substring = "Player already added to the system.";
-                                                                             const substring1 = "MetaMask Tx Signature: User denied transaction signature."
-                                                                             const substring2 = "The registration identity verification failed."
-                                                                             if(string){
-                                                                             if(string.includes(substring)) console.log(substring)
-                                                                             if(string.includes(substring1)) console.log(substring1)
-                                                                             if(string.includes(substring2)) console.log(substring2)
-                                                                                }
-                                                                             return})
-                                                                              }
-                                                                      if(err){console.log("err");return}
-                                                                    })
-  }
+changeUser = async (event)=> {
+    event.preventDefault()
+    console.log("charging username");
+    const stri = event.target.value
+    await this.setState({username : stri})
+    console.log(this.state.username)
+}
+
+  test = () => {
+    const username = this.state.username;
+    console.log("user",username)
+    const maker = this.state.enabledCheckBox;
+    console.log("maker",maker)
+  };
+
     render(){
     return(
-    <div>
+    <div className="container">
+        <div className='login'>
     <h1>Register</h1>
     <form>
-    <p><input type="text" placeholder="Username" /></p>
+    <p><input type="text" placeholder="Username" onChange={this.changeUser} /></p>
+    Vuoi creare un account Maker?
+    <input type="checkbox" defaultChecked={this.state.enabledCheckBox} onChange={this.onClick} />
+
+
     </form>
-             <Button variant="secondary" onClick={this.loadAccount}>Click</Button>
+             <Button variant="secondary" onClick={this.test}>Sign In</Button>
+    </div>
+    <Maps />
     </div>
 
    )

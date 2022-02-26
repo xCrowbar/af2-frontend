@@ -13,15 +13,29 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import designVoting from './blockchain/src/abis/designVoting.json'
 //IMPORT PAGES
 import Home from './components/Home'
-import PlayerDetails from './components/PlayerDetails';
+//IMPORT NAVBAR
 import Layout from './components/Layout'
-import AddPrinter from './components/AddPrinter';
+//IMPORT AUTH COMPONENT
 import Signin from './components/Signin';
 import Signup from './components/Signup';
-import UploadDesign from './components/UploadDesign';
-import CalculateRes from './components/CalculateRes';
-import ListDesign from './components/ListDesign';
-import VoteDesign from './components/VoteDesign';
+//IMPORT PRINTER PAGES
+import AddPrinter from './pages/printers/AddPrinter';
+import MyPrinters from './pages/printers/MyPrinters';
+// IMPORT DESIGN PAGES
+import Announce from './pages/Design/Announce';
+import MyDesign from './pages/Design/MyDesign';
+import MyVotes from './pages/Design/MyVotes';
+import VoteDesign from './pages/Design/VoteDesign';
+//IMPORT ORDERS PAGES
+import NewOrder from './pages/Orders/NewOrder';
+import MyOrder from './pages/Orders/MyOrder';
+
+import BuyToken from './pages/BuyToken';
+
+//IMPORT MAPS FOR TESTS DELETE AFTER COMPLETE
+import Maps from './components/Maps';
+
+
 function App(){
 
 
@@ -66,7 +80,7 @@ const loadBlockchaindata = async ()=>{
         console.log(players2);
         Setdesign(design);
         */
-        setloader(false); // se tutto è andato a buon fine con il wallet metamask appo vado avanti
+       setloader(false); // se tutto è andato a buon fine con il wallet metamask appo vado avanti
     }else{
         window.alert('the smart contract is not deployed')
     }
@@ -77,32 +91,32 @@ if(loader){
     return <div>loading...</div>
 }
 
-//PAGES
-const goHome = async ()=>{
-return(
-<Home />
-)
-
-}
 
 return(
+    <div>
 <div>
           <BrowserRouter>
               <Routes>
                   <Route path="/" element ={<Layout account={currentaccount}/>}>
                   <Route index element={<Home />}/>
-                  <Route path="PlayerDetails" element={<PlayerDetails />}/>
                   <Route path="AddPrinter" element={<AddPrinter />}/>
                   <Route path="Signin" element={<Signin />}/>
                   <Route path="Signup" element={<Signup account={currentaccount}/>}/>
-                  <Route path ="UploadDesign" element={<UploadDesign />}/>
-                  <Route path="CalculateRes" element={<CalculateRes />}/>
-                  <Route path="ListDesign" element={<listDesign />}/>
                   <Route path="VoteDesign" element={<VoteDesign />}/>
+                  <Route path="MyPrinters" element={<MyPrinters />}/>
+                  <Route path="MyOrder" element={<MyOrder />}/>
+                  <Route path="Announce" element={<Announce />}/>
+                  <Route path="MyVotes" element={<MyVotes />}/>
+                  <Route path="AddPrinter" element={<AddPrinter />}/>
+                  <Route path="BuyToken" element={<BuyToken />}/>
+                  <Route path="MyDesign" element={<MyDesign />}/>
+                  <Route path="NewOrder" element={<NewOrder />}/>
+                  <Route path="Maps" element={<Maps />}/>
                   </Route>
               </Routes>
           </BrowserRouter>
 
+</div>
 </div>
     );
 
