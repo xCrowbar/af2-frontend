@@ -6,7 +6,6 @@ import "regenerator-runtime/runtime";
 import Web3 from 'web3';
 import nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Navbar from './components/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //IMPORT CONTRACTS
@@ -16,8 +15,8 @@ import Home from './components/Home'
 //IMPORT NAVBAR
 import Layout from './components/Layout'
 //IMPORT AUTH COMPONENT
-import Signin from './components/Signin';
-import Signup from './components/Signup';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
 //IMPORT PRINTER PAGES
 import AddPrinter from './pages/printers/AddPrinter';
 import MyPrinters from './pages/printers/MyPrinters';
@@ -34,6 +33,10 @@ import BuyToken from './pages/BuyToken';
 
 //IMPORT MAPS FOR TESTS DELETE AFTER COMPLETE
 import Maps from './components/Maps';
+
+//IMPORT PAGE MODIFY MATERIALS
+import ModifyMat from './pages/ModifyMat';
+
 
 
 function App(){
@@ -88,12 +91,12 @@ const loadBlockchaindata = async ()=>{
 }
 
 if(loader){
-    return <div>loading...</div>
+    return <div>loading... You must need to install Metamask</div>
 }
 
 
 return(
-    <div>
+    <div> 
 <div>
           <BrowserRouter>
               <Routes>
@@ -112,6 +115,7 @@ return(
                   <Route path="MyDesign" element={<MyDesign />}/>
                   <Route path="NewOrder" element={<NewOrder />}/>
                   <Route path="Maps" element={<Maps />}/>
+                  <Route path="ModifyMat" element={<ModifyMat />}/>
                   </Route>
               </Routes>
           </BrowserRouter>

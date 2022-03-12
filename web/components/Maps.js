@@ -1,5 +1,5 @@
 import React from 'react';
-
+import * as apiKeys from '../config/APIKEYS.json';
 
 class Maps extends React.Component{
 
@@ -8,7 +8,8 @@ class Maps extends React.Component{
             this.state = {
                 latitude: null,
                 longitude: null,
-                userAddress: null
+                userAddress: null,
+                img: null
             };
             this.getLocation = this.getLocation.bind(this);
             this.getCoordinates = this.getCoordinates.bind(this);
@@ -27,8 +28,10 @@ class Maps extends React.Component{
         console.log(position.coords.latitude);
         this.setState({
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            longitude: position.coords.longitude,
         })
+        this.setState({img: `https://maps.googleapis.com/maps/api/staticmap?center=${this.state.latitude},${this.state.longitude}&zoom=14&size=400x300&sensor=false&markers=color:red%7C${this.state.latitude},${this.state.longitude}&key=${apiKeys["GOOGLE_API_KEY"]}`})
+        console.log(this.state.img);
     }
 
     reverseGeocodeCoordinates(){
@@ -65,8 +68,8 @@ class Maps extends React.Component{
             <p>Longitude : {this.state.longitude}</p>
             <p>Address: {this.state.userAddress}</p>
             {
-                this.state.longitude && this.state.longitude ?
-                <img src={'https://maps.googleapis.com/maps/api/staticmap?center=${this.state.latitude},${this.state.longitude}&zoom=14&size=400x300&sensor=false&markers=color:red%7C${this.state.latitude},${this.state.longitude}&key=${GOOGLE_API_KEY}'} alt=''  />
+                this.state.longitude && this.state.latitude ?
+                <img src={this.state.img} alt=''  />
                 :
                 null
             }
