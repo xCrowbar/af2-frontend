@@ -8,7 +8,7 @@ class UploadSTL extends Component{
     super();
     this.state = {file : undefined, photo: undefined, Taur: undefined, Taup: undefined, Component: undefined};
     this.changeFile = changeFile;
-    this.ipfs = create({ host: '127.0.0.1', port: '5001', protocol: 'http', apiPath: '' });
+    this.ipfs = create({ host: '212.189.207.32', port: '5001', protocol: 'http', apiPath: '' });
   } 
   
 	onChange(event) {
