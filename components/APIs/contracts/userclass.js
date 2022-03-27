@@ -19,8 +19,9 @@ export default class IUser{
         
         console.log(`Indirizzo Contratto----- `+ ContractAddress)
         //*Stampalo per check
-        this.contract = new this.web3.eth.Contract(ABIScheduling, abisAddress["User"]);
+        this.contract = new this.web3.eth.Contract(ABIScheduling,"0x4944b4C0d13C11EeFEf0c84Ba66B0216BA308351");
     }
+    
     async AddUser(name,maker) {
         let account = await this.provider.checkIfWalletIsConnected();
         if(!maker){

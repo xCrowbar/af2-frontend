@@ -18,7 +18,7 @@ export default class OnBoardin{
         
         console.log(`Indirizzo Contratto----- `+ ContractAddress)
         //*Stampalo per check
-        this.contract = new this.web3.eth.Contract(ABIScheduling, ContractAddress);
+        this.contract = new this.web3.eth.Contract(ABIScheduling, "0xcA3105f915F5ABe405f35560dF5ddd5f6F379b99");
     }
     async registerPrinter(printerAddress){
         let account = await this.provider.checkIfWalletIsConnected();
