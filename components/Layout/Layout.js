@@ -68,9 +68,6 @@ export default class Layout extends React.Component{
           <NavDropdown.Item href="/NewOrder">NewOrder</NavDropdown.Item>
           <NavDropdown.Item href="/MyOrder">MyOrder</NavDropdown.Item>
           </NavDropdown>
-          <Button className='button'>
-          <Link to="/BuyToken">Af2-Saldo</Link>
-          </Button>
           <Button className ="button">
           <Link to="/Signup">Signup</Link>
           </Button>
